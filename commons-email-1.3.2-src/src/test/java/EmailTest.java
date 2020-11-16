@@ -62,4 +62,52 @@ public class EmailTest {
 			email.addReplyTo(TEST_EMAILS[0], "Test Reply");
 			assertEquals(1, email.getReplyToAddresses().size());
 		}
+		
+		@Test
+		public void testBuildMimeMessage() throws Exception{
+			String hostname = "Test HostName";
+			email.setHostName(hostname);
+			email.setFrom(TEST_EMAILS[0]);
+			email.addReplyTo(TEST_EMAILS[0], "Test Reply");
+			email.setTo(email.getReplyToAddresses());
+			email.addBcc(TEST_EMAILS);
+			email.addCc(TEST_EMAILS);
+			String name = "TestHeader";
+			String value = "1";
+			email.addHeader(name, value);
+			email.setSubject("Test Subject");
+			email.setCharset("US-ASCII");
+			email.buildMimeMessage();
+		}
+		
+		@Test (expected = IllegalStateException.class)
+		public void testBuildMimeMessageRepeat() throws Exception{
+			String hostname = "Test HostName";
+			email.setHostName(hostname);
+			email.setFrom(TEST_EMAILS[0]);
+			email.addReplyTo(TEST_EMAILS[0], "Test Reply");
+			email.setTo(email.getReplyToAddresses());
+			email.buildMimeMessage();
+			email.buildMimeMessage();
+		}
+		
+		@Test (expected = EmailException.class)
+		public void testBuildMimeMessageNoTo() throws Exception{
+			String hostname = "Test HostName";
+			email.setHostName(hostname);
+			email.setFrom(TEST_EMAILS[0]);
+			email.addReplyTo(TEST_EMAILS[0], "Test Reply");
+			//email.setTo(email.getReplyToAddresses());
+			email.buildMimeMessage();
+		}
+		
+		@Test (expected = EmailException.class)
+		public void testBuildMimeMessageNoFrom() throws Exception{
+			String hostname = "Test HostName";
+			email.setHostName(hostname);
+			//email.setFrom(TEST_EMAILS[0]);
+			email.addReplyTo(TEST_EMAILS[0], "Test Reply");
+			email.setTo(email.getReplyToAddresses());
+			email.buildMimeMessage();
+		}
 }
