@@ -117,4 +117,13 @@ public class EmailTest {
 			email.setHostName(hostname);
 			assertEquals(hostname, email.getHostName());
 		}
+		
+		@Test
+		public void testGetMailSession() throws Exception{
+			String hostname = "Test HostName";
+			email.setHostName(hostname);
+			email.setBounceAddress(TEST_EMAILS[1]);
+			email.setAuthentication("userName", "password");
+			email.getMailSession();
+		}
 }
