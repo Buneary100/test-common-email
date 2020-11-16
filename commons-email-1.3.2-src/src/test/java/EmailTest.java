@@ -110,4 +110,11 @@ public class EmailTest {
 			email.setTo(email.getReplyToAddresses());
 			email.buildMimeMessage();
 		}
+		
+		@Test
+		public void testGetHostName() throws Exception{
+			String hostname = "Test HostName";
+			email.setHostName(hostname);
+			assertEquals(hostname, email.getHostName());
+		}
 }
