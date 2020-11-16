@@ -1,5 +1,7 @@
 import static org.junit.Assert.assertEquals;
 
+import java.util.Date;
+
 import org.apache.commons.mail.EmailException;
 import org.junit.After;
 import org.junit.Before;
@@ -125,5 +127,17 @@ public class EmailTest {
 			email.setBounceAddress(TEST_EMAILS[1]);
 			email.setAuthentication("userName", "password");
 			email.getMailSession();
+		}
+		
+		@Test
+		public void testGetSentDateNull() throws Exception{
+			email.getSentDate();
+		}
+		
+		@Test
+		public void testGetSentDate() throws Exception{
+			Date today = new Date();
+			email.setSentDate(today);
+			email.getSentDate();
 		}
 }
