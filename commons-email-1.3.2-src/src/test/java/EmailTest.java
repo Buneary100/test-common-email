@@ -145,4 +145,10 @@ public class EmailTest {
 		public void testGetSocketConnectionTimeout() throws Exception{
 			email.getSocketConnectionTimeout();
 		}
+		
+		@Test
+		public void testSetFrom() throws Exception{
+			email.setFrom(TEST_EMAILS[0]);
+			assertEquals(TEST_EMAILS[0], email.getFromAddress().toString());
+		}
 }
