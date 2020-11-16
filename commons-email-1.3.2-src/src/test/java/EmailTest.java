@@ -57,4 +57,9 @@ public class EmailTest {
 			email.addHeader(null, value);
 		}
 		
+		@Test
+		public void testAddReplyTo() throws Exception{
+			email.addReplyTo(TEST_EMAILS[0], "Test Reply");
+			assertEquals(1, email.getReplyToAddresses().size());
+		}
 }
