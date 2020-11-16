@@ -140,4 +140,9 @@ public class EmailTest {
 			email.setSentDate(today);
 			email.getSentDate();
 		}
+		
+		@Test
+		public void testGetSocketConnectionTimeout() throws Exception{
+			email.getSocketConnectionTimeout();
+		}
 }
